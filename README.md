@@ -7,6 +7,31 @@ A complete SDLC Workflow in a Plugin: 26 agents across 9 phases, 43 knowledge sk
 - **The Pragmatic Programmer** — DRY, ETC, tracer bullets, code generation
 - **Clean Code** — naming, small functions, F.I.R.S.T. tests, SOLID
 
+## Installation
+
+### Quick Install (1 minute)
+
+```bash
+npm install -g sdlc-workflow
+sdlc-workflow install
+```
+
+**Or from source:**
+
+```bash
+git clone https://github.com/saitarrun/sdlc-workflow
+cd sdlc-workflow
+npm run install-local
+```
+
+**Or via Claude Code:**
+
+```
+/plugin install github:saitarrun/sdlc-workflow
+```
+
+---
+
 ## Features
 
 ### 26 Specialized Agents + Auto-Skill Loading (Phase 1 & 2 Complete)
@@ -139,30 +164,6 @@ sdlc
 **Full command reference**: See [QUICK_REFERENCE.md](./QUICK_REFERENCE.md)
 
 ---
-
-## Installation
-
-### Quick Install (1 minute)
-
-```bash
-npm install -g sdlc-workflow
-sdlc-workflow install
-```
-
-**Or from source:**
-
-```bash
-git clone https://github.com/saitarrun/sdlc-workflow
-cd sdlc-workflow
-npm run install-local
-```
-
-**Or via Claude Code:**
-
-```
-/plugin install github:saitarrun/sdlc-workflow
-```
-
 
 ## Usage
 
