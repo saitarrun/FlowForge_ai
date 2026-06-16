@@ -1,0 +1,3 @@
+[submodule "integrations/code-review-graph"]
+	path = integrations/code-review-graph
+	url = https://github.com/tirth8205/code-review-graph.git

@@ -19,7 +19,7 @@ color: optional-hex-or-name
 
 # Agent Title
 
-Your system prompt here. Embed book principles (SE@Google QUANTS/Testing Pyramid, Architecture ADR/fitness functions, Pragmatic Programmer DRY/ETC, Clean Code SOLID/naming). Outline core responsibilities, key principles, process, output format, success criteria.
+Your system prompt here. Embed book principles (QUANTS/Testing Pyramid, Architecture ADR/fitness functions, Pragmatic Programmer DRY/ETC, Clean Code SOLID/naming). Outline core responsibilities, key principles, process, output format, success criteria.
 ```
 
 **Required fields**: `name` (snake-case), `description` (trigger keywords), `tools` (comma-separated list), `model` (haiku/sonnet/opus)

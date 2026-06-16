@@ -1,11 +1,11 @@
-# Google Engineering Team Replication Roadmap
+# Complete Engineering Team Roadmap
 
-Complete plan to replicate a full Google Software Engineering team structure, practices, and culture.
+Complete plan to build a full-featured Software Engineering team structure, practices, and culture.
 
 ## Status: Gap Analysis
 
 **Current**: 20 agents, 30 skills, 6 phases  
-**Target**: 26 agents, 43 skills, 9 phases (complete Google team)  
+**Target**: 26 agents, 43 skills, 9 phases (complete SDLC workflow)  
 
 ---
 
@@ -271,7 +271,7 @@ Complete plan to replicate a full Google Software Engineering team structure, pr
 
 ## PRACTICES TO EMBED (New Skill Content)
 
-### From "Software Engineering at Google"
+### From Software Engineering Best Practices
 
 **Critique Culture**
 - Readability reviews (separate from code reviews)
@@ -395,7 +395,7 @@ Observability Engineer — Metrics, logs, traces, dashboards
 
 ---
 
-## SUCCESS METRICS (Google QUANTS)
+## SUCCESS METRICS (QUANTS Framework)
 
 ### Quality
 - Code coverage ≥ 80% (critical paths)
@@ -456,15 +456,15 @@ Observability Engineer — Metrics, logs, traces, dashboards
 
 ## REFERENCES
 
-- "Software Engineering at Google" — Chapters on testing, documentation, tools, culture
+- Software Engineering Best Practices — Chapters on testing, documentation, tools, culture
 - "Architecture: The Hard Parts" — Service design, coupling, fitness functions
-- Google SRE Book — Incident response, postmortems, observability
-- Google Cloud Best Practices — Release, deployment, operations
+- SRE Best Practices — Incident response, postmortems, observability
+- Cloud Best Practices — Release, deployment, operations
 - Web.dev — Accessibility standards, performance
 - OpenAPI Specification — API design standards
 
 ---
 
-**Status**: Roadmap for complete Google team replication  
+**Status**: Roadmap for complete SDLC workflow  
 **Effort**: ~40 commits, ~80 code changes, ~20 new templates  
 **Timeline**: Can be implemented incrementally (phase by phase)

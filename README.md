@@ -1,8 +1,8 @@
 # SDLC Workflow Plugin
 
-A complete Google Engineering Team in a Plugin: 26 agents across 9 phases, 43 knowledge skills, 14 commands. Covers planning → incident response → retrospectives, with industry-standard practices from Google, mattpocock, and SDLC best practices:
+A complete SDLC Workflow in a Plugin: 26 agents across 9 phases, 43 knowledge skills, 14 commands. Covers planning → incident response → retrospectives, with industry-standard SDLC best practices:
 
-- **Software Engineering at Google** — QUANTS, INVEST, Critique/LGTM, Testing Pyramid, CI/CD
+- **Software Engineering Best Practices** — QUANTS, INVEST, Critique/LGTM, Testing Pyramid, CI/CD
 - **Architecture: The Hard Parts** — ADR, coupling/cohesion, fitness functions, service design
 - **The Pragmatic Programmer** — DRY, ETC, tracer bullets, code generation
 - **Clean Code** — naming, small functions, F.I.R.S.T. tests, SOLID
@@ -11,7 +11,7 @@ A complete Google Engineering Team in a Plugin: 26 agents across 9 phases, 43 kn
 
 ### 26 Specialized Agents + Auto-Skill Loading (Phase 1 & 2 Complete)
 
-**All agents auto-load phase-specific skills** — agents automatically apply relevant methodologies to produce Google-standard outputs. 
+**All agents auto-load phase-specific skills** — agents automatically apply relevant methodologies to produce industry-standard outputs. 
 
 **New agents in Phase 1 & 2**:
 - Engineering Manager (team health, retrospectives, QUANTS)
@@ -66,7 +66,7 @@ A complete Google Engineering Team in a Plugin: 26 agents across 9 phases, 43 kn
 | `/sdlc-test` | 4 | Test suite + security audits (AppSec + pen test) |
 | `/sdlc-deploy` | 5 | CI/CD pipeline + cloud IaC |
 | `/sdlc-ops` | 6 | SLOs + security monitoring + data pipelines |
-| `/sdlc-review` | Any | SE@Google Critique-style PR review with gh pr comments |
+| `/sdlc-review` | Any | Industry-standard PR review with gh pr comments |
 
 ### 43 Knowledge Skills
 
@@ -90,7 +90,7 @@ Skills inject methodology into agents (no tools/model — pure knowledge context
 
 **Phase 4 — Testing & Security Auditing**
 - `skill-code-quality` — Linting, testing pyramid, SAST/SCA, security standards, CI/CD gates
-- `skill-code-review` — SE@Google Critique taxonomy, LGTM culture
+- `skill-code-review` — Code review taxonomy, peer review culture
 - `skill-pr-review` — Multi-agent parallel PR review, CLAUDE.md compliance, git history, confidence scoring
 - `skill-testing` — Testing Pyramid, F.I.R.S.T., test doubles
 - `skill-tdd` — Test-driven development: red-green-refactor loop
@@ -173,13 +173,29 @@ For faster iteration, run individual phases:
 
 ### Code Review
 
-Perform SE@Google Critique-style review on any PR:
+Perform industry-standard review on any PR:
 
 ```bash
 /sdlc-review --pr 1                              # Review PR #1 with 3 parallel agents
 ```
 
 The command posts inline comments via `gh pr comment`, confidence-filtered to show only high-confidence issues.
+
+#### With code-review-graph Integration
+
+Enhanced review with visual dependency analysis:
+
+```bash
+/sdlc-review --pr 1 --with-graph                   # Review PR #1 with dependency visualization
+```
+
+This includes:
+- Coupling and cohesion analysis
+- Change impact on system architecture
+- Dependency graph visualization
+- Refactoring safety assessment
+
+See [INTEGRATIONS.md](./INTEGRATIONS.md) for full details on code-review-graph capabilities.
 
 ## Multi-Agent Parallel Collaboration (NEW in v1.0.0)
 
@@ -266,9 +282,9 @@ All development agents enforce:
 - One level of abstraction per function
 - Self-documenting code reduces comment burden
 
-### SE@Google Practices
+### Software Engineering Best Practices
 
-- **Critique/LGTM code review** — Blocking issues vs. nits; 24-hour SLA
+- **Code Review** — Blocking issues vs. nits; 24-hour SLA
 - **Testing Pyramid** — Unit (cheap) ≫ Integration ≫ E2E (expensive)
 - **Beyoncé Rule** — "If you care about it, test it"
 - **Hermetic builds** — No network calls, reproducible artifacts, artifact-based caching

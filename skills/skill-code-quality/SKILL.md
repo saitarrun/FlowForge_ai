@@ -101,7 +101,7 @@ git diff --stat HEAD~10
 
 ## 2. Testing & Coverage Rules
 
-### Testing Pyramid (SE@Google)
+### Testing Pyramid
 
 ```
           ▲
@@ -478,4 +478,4 @@ Use this checklist when setting up quality standards on a new project:
 
 ---
 
-**Reference**: SE@Google, Clean Code, The Pragmatic Programmer, Architecture: The Hard Parts
+**Reference**: Clean Code, The Pragmatic Programmer, Architecture: The Hard Parts

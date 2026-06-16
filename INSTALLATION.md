@@ -74,7 +74,7 @@ Then restart Claude Code.
 - `skill-ux-design` — User journeys, wireframes
 - `skill-code-standards` — Clean Code, SOLID, DRY
 - **`skill-code-quality`** — NEW: Linting, testing, SAST/SCA, CI/CD gates
-- `skill-code-review` — SE@Google Critique
+- `skill-code-review` — Code Review
 - `skill-testing` — Testing Pyramid, F.I.R.S.T.
 - `skill-security-audit` — OWASP Top 10
 - `skill-cicd` — Hermetic builds, trunk-based dev

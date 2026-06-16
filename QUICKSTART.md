@@ -69,7 +69,7 @@ Use individual commands to skip ahead or redo phases:
 
 # Anytime — Code Review
 /sdlc-review --pr 1
-# Output: SE@Google Critique-style review as PR comments
+# Output: Code review-style review as PR comments
 ```
 
 ---
@@ -102,7 +102,7 @@ Each phase produces specific artifacts:
 ### 1. **Book-Guided Best Practices**
 
 Every agent is trained on principles from:
-- **Software Engineering at Google** — QUANTS, INVEST, Testing Pyramid, Hermetic Builds
+- **SDLC Best Practices** — QUANTS, INVEST, Testing Pyramid, Hermetic Builds
 - **Architecture: The Hard Parts** — ADRs, coupling/cohesion, fitness functions
 - **The Pragmatic Programmer** — DRY, ETC, tracer bullets, code generation
 - **Clean Code** — naming, small functions, SOLID, F.I.R.S.T. tests

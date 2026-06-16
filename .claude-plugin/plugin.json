@@ -1,7 +1,7 @@
 {
   "name": "sdlc-workflow",
   "version": "1.0.0",
-  "description": "Complete Google Engineering Team in a Plugin: 26 agents across 9 phases (planning → incident response → retrospectives), 43 knowledge skills (core SDLC + Google practices + mattpocock integrations), 14 orchestrator commands. Full incident management, performance optimization, accessibility, observability, tech debt, release management, and organizational health.",
+  "description": "Complete SDLC Workflow in a Plugin: 26 agents across 9 phases (planning → incident response → retrospectives), 43 knowledge skills (core SDLC + advanced methodology), 14 orchestrator commands. Full incident management, performance optimization, accessibility, observability, tech debt, release management, and organizational health.",
   "keywords": [
     "sdlc",
     "workflow",
@@ -25,14 +25,25 @@
   "agents": 26,
   "skills": 43,
   "commands": 14,
+  "integrations": {
+    "code-review-graph": {
+      "name": "code-review-graph",
+      "repository": "https://github.com/tirth8205/code-review-graph",
+      "path": "integrations/code-review-graph",
+      "description": "Visual code review analysis with dependency graphs and change impact assessment",
+      "bundled": true,
+      "autoInstall": true
+    }
+  },
   "highlights": [
     "20 specialized role-based agents",
     "6-phase SDLC orchestrator with approval gates",
-    "43 knowledge skills: 13 core SDLC, 30 Google practices (incident mgmt, perf, a11y, observability, release, tech debt, org health, etc.), 13 mattpocock integrations",
+    "43 knowledge skills: 13 core SDLC, 30 advanced methodology skills (incident mgmt, perf, a11y, observability, release, tech debt, org health, etc.)",
     "6 new agents: Engineering Manager, Tech Lead, Release Manager, Technical Writer, Performance Engineer, Accessibility Engineer",
     "5 new phases: Tech Debt Optimization, Incident Response, Retrospectives (+ 9 total)",
-    "Ready-to-use templates: RFC, design docs, ADRs, postmortems, SLOs, incident reports, performance benchmarks, accessibility audits"
+    "Ready-to-use templates: RFC, design docs, ADRs, postmortems, SLOs, incident reports, performance benchmarks, accessibility audits",
     "Code quality enforcement: linting, testing pyramid, SAST/SCA, CI/CD gates",
+    "Integrated code-review-graph for visual dependency analysis and change impact",
     "Production-ready configuration templates",
     "Complete documentation and examples"
   ]

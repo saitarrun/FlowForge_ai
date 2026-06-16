@@ -1,9 +1,9 @@
 ---
-description: Anytime — SE@Google Critique-style code review. Spawns 3 parallel reviewers (compliance, bugs, history). Posts inline comments via gh pr comment.
+description: Anytime — Industry-standard code review. Spawns 3 parallel reviewers (compliance, bugs, history). Posts inline comments via gh pr comment.
 argument-hint: "[--pr <number>] [--aspects all]"
 ---
 
-# Code Review — SE@Google Critique Style
+# Code Review — Industry-Standard Review Style
 
 Spawns agents in parallel: code-critic ×3 (compliance | bugs | history)
 

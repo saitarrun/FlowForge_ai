@@ -1,6 +1,6 @@
 # Agent-Skills Mapping Manifest
 
-**Complete Google Engineering Team** — 26 agents × 43 skills × 9 phases
+**Complete SDLC Workflow** — 26 agents × 43 skills × 9 phases
 
 ---
 
@@ -10,7 +10,7 @@
 2. **Commands** auto-load all phase-specific skills before spawning agents
 3. **Agent system prompt** begins with: "You have access to these skills: X, Y, Z..."
 4. **Skill content** loads as context (pure methodology, not tools)
-5. **Outputs** follow skill templates and Google standards
+5. **Outputs** follow skill templates and industry-standard practices
 
 ---
 

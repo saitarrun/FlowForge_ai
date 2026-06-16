@@ -32,7 +32,7 @@ A multi-agent SDLC orchestration system: 20 agents × 6 phases → planning, des
 
 **Tools**: Include only what the agent uses — Read, Write, Edit, Bash, Glob, Grep, WebFetch
 
-Embed book principles (SE@Google QUANTS/INVEST/Testing Pyramid, Architecture: ADR/fitness functions, Pragmatic Programmer DRY/ETC, Clean Code naming/SOLID) in agent bodies.
+Embed book principles (QUANTS/INVEST/Testing Pyramid, Architecture: ADR/fitness functions, Pragmatic Programmer DRY/ETC, Clean Code naming/SOLID) in agent bodies.
 
 ## Skill Conventions
 

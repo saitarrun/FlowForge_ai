@@ -20,6 +20,16 @@ if (!fs.existsSync(CLAUDE_HOME)) {
   console.log(`✓ Created ${CLAUDE_HOME}`);
 }
 
+// Ensure submodules are initialized
+console.log('📦 Initializing integrations (code-review-graph)...');
+const { execSync } = require('child_process');
+try {
+  execSync('git submodule update --init --recursive', { cwd: PLUGIN_DIR });
+  console.log('✓ Integrations initialized');
+} catch (e) {
+  console.warn('⚠ Note: Integrations may not be available (git required)');
+}
+
 function replaceDir(src, dest, label) {
   if (!fs.existsSync(src)) {
     console.error(`❌ Source not found: ${src}`);
@@ -54,6 +64,16 @@ fs.readdirSync(skillsSrc)
       `skills/${skill}`,
     );
   });
+
+// Copy integrations (code-review-graph)
+const integrationsSrc = path.join(PLUGIN_DIR, 'integrations');
+if (fs.existsSync(integrationsSrc)) {
+  replaceDir(
+    integrationsSrc,
+    path.join(CLAUDE_HOME, 'integrations'),
+    'integrations (code-review-graph)',
+  );
+}
 
 console.log('\n✅ SDLC Workflow plugin installed successfully!\n');
 console.log('Available commands:');
