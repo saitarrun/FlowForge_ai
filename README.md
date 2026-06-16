@@ -7,6 +7,31 @@ A complete SDLC Workflow in a Plugin: 26 agents across 9 phases, 43 knowledge sk
 - **The Pragmatic Programmer** — DRY, ETC, tracer bullets, code generation
 - **Clean Code** — naming, small functions, F.I.R.S.T. tests, SOLID
 
+## Installation
+
+### Quick Install (1 minute)
+
+```bash
+npm install -g sdlc-workflow
+sdlc-workflow install
+```
+
+**Or from source:**
+
+```bash
+git clone https://github.com/saitarrun/sdlc-workflow
+cd sdlc-workflow
+npm run install-local
+```
+
+**Or via Claude Code:**
+
+```
+/plugin install github:saitarrun/sdlc-workflow
+```
+
+---
+
 ## Features
 
 ### 26 Specialized Agents + Auto-Skill Loading (Phase 1 & 2 Complete)
@@ -140,30 +165,6 @@ sdlc
 
 ---
 
-## Installation
-
-### Quick Install (1 minute)
-
-```bash
-npm install -g sdlc-workflow
-sdlc-workflow install
-```
-
-**Or from source:**
-
-```bash
-git clone https://github.com/saitarrun/sdlc-workflow
-cd sdlc-workflow
-npm run install-local
-```
-
-**Or via Claude Code:**
-
-```
-/plugin install github:saitarrun/sdlc-workflow
-```
-
-
 ## Usage
 
 ### Master Orchestrator
@@ -181,6 +182,31 @@ The command will:
 4. Produce comprehensive artifacts (PRD, ADR, threat model, wireframes, code, tests, security audit, SLOs, runbooks)
 5. Offer to create a GitHub PR with all changes
 
+### Orchestrator — Real-Time Agent Coordination
+
+The orchestrator manages agent dependencies, maintains an execution queue, and broadcasts real-time status updates:
+
+```bash
+npm run orchestrator -- --dir /path/to/project --port 4242 --run-id <optional-run-id>
+```
+
+**Features:**
+- **Dependency Graph**: Automatically determines which agents can run based on completions
+- **Queue Management**: Maintains a queue of ready-to-spawn agents
+- **Real-Time Updates**: Broadcasts agent status changes via Server-Sent Events
+- **Persistent State**: Stores all agent status in `.sdlc/run-<timestamp>/collaboration-log.json`
+- **Multi-Run Support**: Tracks multiple concurrent or historical runs
+
+**API Endpoints:**
+- `GET /api/runs` — List all runs
+- `GET /api/runs/:id` — Get specific run details with agent statuses
+- `POST /api/agent/spawn/:agent` — Mark agent as working
+- `POST /api/agent/complete/:agent` — Mark agent as complete
+- `POST /api/agent/block/:agent` — Mark agent as blocked
+- `GET /events` — Server-Sent Events stream for real-time updates
+
+See [AGENT_REPORTER_GUIDE.md](./AGENT_REPORTER_GUIDE.md) for integration examples.
+
 ### Individual Phase Commands
 
 For faster iteration, run individual phases:
@@ -193,6 +219,107 @@ For faster iteration, run individual phases:
 /sdlc-deploy --trigger                           # Phase 5 (CI/CD + cloud)
 /sdlc-ops --framework prometheus                 # Phase 6 (SRE + monitoring)
 ```
+
+### Dashboard — Real-Time Agent Monitoring
+
+Monitor all 26 agents running across 6 phases with live status updates, metrics, and real-time synchronization:
+
+```bash
+# Terminal 1: Start the orchestrator
+npm run orchestrator -- --dir /path/to/project --port 4242
+
+# Terminal 2: Open the dashboard
+open http://localhost:4242
+```
+
+#### Dashboard Features
+
+**System Monitor Header**
+- Total agents in repository (26)
+- Uptime and error tracking
+- Real-time status updates every 2 seconds
+
+**Running Agents Section**
+- Active agents currently executing
+- Status indicators: green (working), gray (waiting), red (blocked)
+- Phase labels for organizational context
+- Start time, duration, and latest activity log
+- Terminal logs viewer for each agent
+
+**Available Agents Section**
+- All 26 repository agents with real-time status sync
+- Synchronized with orchestrator — shows WORKING, COMPLETE, WAITING, or AVAILABLE
+- Organized by SDLC phase (Planning, Design, Development, Testing & Security, Deployment, Operations)
+- Updates automatically as agents progress through orchestration
+
+**Completed Agents Section**
+- Agents that have finished execution
+- Duration and completion timestamp
+- Full execution history
+
+**Metrics Dashboard**
+- **QUEUED_AGENTS**: Agents waiting to start (depend on others)
+- **RUNNING_AGENTS**: Currently executing agents
+- **COMPLETED**: Successfully finished agents
+- **FAILED**: Blocked or error agents
+- Progress bars for visual status overview
+
+#### Agent Sync Integration
+
+Agents report status via the reporter CLI, which syncs to the dashboard:
+
+```bash
+# Agent reports its status
+npm run report-agent -- <agent-name> working "What it's doing"
+npm run report-agent -- <agent-name> complete
+npm run report-agent -- <agent-name> block "Reason"
+```
+
+Status updates flow:
+1. **Agent Reports** → `/api/agent/complete/:agent` HTTP endpoint
+2. **Orchestrator Stores** → Updates `collaboration-log.json`
+3. **Dashboard Syncs** → Polls `/api/runs/:id` every 2 seconds
+4. **Available Agents** → Shows updated status in real-time
+
+#### Dashboard Customization
+
+```bash
+npm run orchestrator -- --dir <project> --port 4242 --run-id <specific-run>
+```
+
+The dashboard automatically:
+- Selects the most recent run on startup
+- Persists run history in `.sdlc/run-*/`
+- Broadcasts updates via Server-Sent Events (SSE) to all connected clients
+- Falls back to polling if SSE unavailable
+
+#### Dashboard UI
+
+**Clean, Terminal-Style Interface** — Professional monitoring with dark theme and terminal green accents (#00ff41)
+
+The dashboard displays:
+- **SYSTEM MONITOR** header with uptime and error tracking
+- **Agent Deployment** section showing active orchestration nodes
+- **Running Agents** table with live status indicators (green pulse for working agents)
+- **Available Agents** section showing all 26 repository agents with synchronized status
+- **Completed Agents** section for finished executions
+- **Metrics Cards** at the bottom showing QUEUED, RUNNING, COMPLETED, and FAILED counts with progress bars
+
+All sections update automatically as agents progress through the orchestration workflow.
+
+![Dashboard Overview](./docs/screenshots/dashboard-overview.png)
+
+**Dashboard Features:**
+- **Real-time status sync** — All 26 agents show current status (WORKING, COMPLETE, WAITING, AVAILABLE)
+- **Terminal-style design** — Black background (#000000) with green accents (#00ff41)
+- **Live metrics** — Progress bars for queued, running, completed, and failed agents
+- **Agent organization** — Grouped by phase (Planning, Design, Development, Testing & Security, Deployment, Operations)
+- **Execution tracking** — Start times, durations, and activity logs for each agent
+- **Responsive updates** — Automatically refreshes every 2 seconds via polling or SSE
+
+See [DASHBOARD.md](./docs/DASHBOARD.md) for detailed architecture and usage guide.
+
+---
 
 ### Code Review
 

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ORCHESTRATOR | Agent Monitoring</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#0a0a0a",
+                        "outline": "#84967e",
+                        "tertiary-container": "#dfdec4",
+                        "on-secondary": "#123815",
+                        "primary": "#ebffe2",
+                        "on-primary-fixed": "#002203",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#e5e4ca",
+                        "on-secondary-fixed-variant": "#2a4f2a",
+                        "surface-variant": "#1a1a1a",
+                        "secondary-fixed-dim": "#a7d2a1",
+                        "primary-fixed": "#00ff41",
+                        "on-surface": "#e5e4cf",
+                        "surface-container-low": "#0f0f0f",
+                        "inverse-primary": "#006e16",
+                        "secondary-fixed": "#c2eebc",
+                        "background": "#000000",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed": "#002205",
+                        "on-primary-container": "#007117",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#474835",
+                        "inverse-on-surface": "#303123",
+                        "inverse-surface": "#e5e4cf",
+                        "primary-container": "#00ff41",
+                        "outline-variant": "#2a2a2a",
+                        "tertiary": "#fcfbe0",
+                        "on-background": "#e5e4cf",
+                        "on-surface-variant": "#b9ccb2",
+                        "surface-tint": "#00ff41",
+                        "on-primary-fixed-variant": "#00530e",
+                        "surface-bright": "#1a1a1a",
+                        "on-tertiary": "#313220",
+                        "tertiary-fixed-dim": "#c8c8af",
+                        "on-tertiary-container": "#61624d",
+                        "primary-fixed-dim": "#00ff41",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed": "#1c1d0c",
+                        "on-secondary-container": "#99c394",
+                        "secondary-container": "#2c512c",
+                        "on-primary": "#003907",
+                        "surface-container": "#111111",
+                        "surface-container-highest": "#1a1a1a",
+                        "surface-container-lowest": "#050505",
+                        "surface-dim": "#000000",
+                        "surface-container-high": "#161616",
+                        "secondary": "#a7d2a1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "margin-desktop": "32px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "lg": "24px",
+                        "xl": "48px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["JetBrains Mono"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "label-md": ["JetBrains Mono"],
+                        "body-md": ["JetBrains Mono"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "code-sm": ["JetBrains Mono"],
+                        "display": ["Hanken Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-sm": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "code-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "label-caps": ["11px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glow-active {
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.15);
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #000000; }
+        ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 2px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00ff41; }
+        .pulse-active {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-lg selection:bg-primary-fixed selection:text-on-primary-fixed">
+<div class="flex min-h-screen">
+    <!-- Main Canvas -->
+    <main class="flex-1 flex flex-col min-w-0">
+        <!-- TopAppBar -->
+        <header class="flex justify-between items-center w-full h-16 px-margin-desktop bg-background/80 backdrop-blur-md sticky top-0 z-40 border-b border-outline-variant">
+            <div class="flex items-center gap-8">
+                <h2 class="font-headline-md text-headline-md font-bold tracking-tight text-on-surface">SYSTEM MONITOR</h2>
+                <div class="hidden lg:flex items-center gap-6 font-code-sm text-code-sm">
+                    <span id="total-agents" class="text-primary-fixed font-bold">Total Agents: 0</span>
+                    <span id="errors" class="text-on-surface-variant">Recent Errors: 0</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-6">
+            </div>
+        </header>
+
+        <!-- Page Content -->
+        <div class="p-margin-desktop space-y-gutter overflow-y-auto flex-1">
+                <!-- Dashboard Header -->
+                <div class="flex justify-between items-end">
+                    <div>
+                        <h3 class="font-headline-lg text-headline-lg text-on-surface">Agent Deployment</h3>
+                        <p class="text-on-surface-variant font-body-sm" id="agent-count">Monitoring 0 active SDLC orchestration nodes</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button id="export-csv-btn" class="px-4 py-2 bg-surface-container-high border border-outline-variant font-label-caps text-label-caps hover:bg-surface-variant transition-colors cursor-pointer">EXPORT_CSV</button>
+                        <button id="pause-all-btn" class="px-4 py-2 bg-primary-fixed text-on-primary-fixed font-label-caps text-label-caps hover:brightness-110 transition-colors cursor-pointer">PAUSE_ALL</button>
+                    </div>
+                </div>
+
+                <!-- Running Agents Section -->
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary-fixed text-[20px]">play_arrow</span>
+                        <h4 class="font-headline-md text-headline-md text-primary-fixed">Running Agents</h4>
+                        <span class="text-on-surface-variant font-code-sm" id="running-count">(0)</span>
+                    </div>
+                    <div class="bg-surface-container-lowest border border-outline-variant">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="border-b border-outline-variant bg-surface-container">
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">AGENT ID</th>
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">STATUS</th>
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">PHASE</th>
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">START TIME</th>
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">DURATION</th>
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">LATEST LOG</th>
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">ACTIONS</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="running-agents-table" class="divide-y divide-outline-variant font-code-sm text-code-sm">
+                                    <!-- Running agents rows inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Idle Agents Section -->
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-outline-variant text-[20px]">pause_circle</span>
+                        <h4 class="font-headline-md text-headline-md text-outline-variant">Available Agents</h4>
+                        <span class="text-on-surface-variant font-code-sm" id="idle-count">(26)</span>
+                    </div>
+                    <div class="bg-surface-container-lowest border border-outline-variant">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="border-b border-outline-variant bg-surface-container">
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">AGENT ID</th>
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">STATUS</th>
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">PHASE</th>
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">START TIME</th>
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">DURATION</th>
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">LATEST LOG</th>
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">ACTIONS</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="idle-agents-table" class="divide-y divide-outline-variant font-code-sm text-code-sm">
+                                    <!-- Idle agents rows inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Completed Agents Section -->
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
+                        <h4 class="font-headline-md text-headline-md text-secondary">Completed Agents</h4>
+                        <span class="text-on-surface-variant font-code-sm" id="completed-count">(0)</span>
+                    </div>
+                    <div class="bg-surface-container-lowest border border-outline-variant">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="border-b border-outline-variant bg-surface-container">
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">AGENT ID</th>
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">STATUS</th>
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">PHASE</th>
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">START TIME</th>
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">DURATION</th>
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">LATEST LOG</th>
+                                        <th class="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant">ACTIONS</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="completed-agents-table" class="divide-y divide-outline-variant font-code-sm text-code-sm">
+                                    <!-- Completed agents rows inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Metrics Footer -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+                    <div class="p-6 bg-surface-container border border-outline-variant relative overflow-hidden group">
+                        <div class="relative z-10">
+                            <p class="font-label-caps text-label-caps text-on-surface-variant mb-2">QUEUED_AGENTS</p>
+                            <h4 class="font-headline-md text-headline-md text-primary-fixed" id="metric-queued">0</h4>
+                            <div class="w-full bg-surface-dim h-1 mt-4 relative overflow-hidden">
+                                <div id="metric-queued-bar" class="absolute left-0 top-0 h-full bg-primary-fixed shadow-[0_0_8px_#00ff41]" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="absolute right-[-20px] bottom-[-20px] opacity-5 group-hover:opacity-10 transition-opacity">
+                            <span class="material-symbols-outlined text-[80px]">hourglass_empty</span>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-surface-container border border-outline-variant relative overflow-hidden group">
+                        <div class="relative z-10">
+                            <p class="font-label-caps text-label-caps text-on-surface-variant mb-2">RUNNING_AGENTS</p>
+                            <h4 class="font-headline-md text-headline-md text-primary-fixed" id="metric-running">0</h4>
+                            <div class="w-full bg-surface-dim h-1 mt-4 relative overflow-hidden">
+                                <div id="metric-running-bar" class="absolute left-0 top-0 h-full bg-primary-fixed shadow-[0_0_8px_#00ff41]" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="absolute right-[-20px] bottom-[-20px] opacity-5 group-hover:opacity-10 transition-opacity">
+                            <span class="material-symbols-outlined text-[80px]">play_arrow</span>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-surface-container border border-outline-variant relative overflow-hidden group">
+                        <div class="relative z-10">
+                            <p class="font-label-caps text-label-caps text-on-surface-variant mb-2">COMPLETED</p>
+                            <h4 class="font-headline-md text-headline-md text-secondary" id="metric-complete">0</h4>
+                            <div class="w-full bg-surface-dim h-1 mt-4 relative overflow-hidden">
+                                <div id="metric-complete-bar" class="absolute left-0 top-0 h-full bg-secondary shadow-[0_0_8px_#a7d2a1]" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="absolute right-[-20px] bottom-[-20px] opacity-5 group-hover:opacity-10 transition-opacity">
+                            <span class="material-symbols-outlined text-[80px]">check_circle</span>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-surface-container border border-outline-variant relative overflow-hidden group">
+                        <div class="relative z-10">
+                            <p class="font-label-caps text-label-caps text-on-surface-variant mb-2">FAILED</p>
+                            <h4 class="font-headline-md text-headline-md text-error" id="metric-failed">0</h4>
+                            <div class="w-full bg-surface-dim h-1 mt-4 relative overflow-hidden">
+                                <div id="metric-failed-bar" class="absolute left-0 top-0 h-full bg-error shadow-[0_0_8px_#ffb4ab]" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="absolute right-[-20px] bottom-[-20px] opacity-5 group-hover:opacity-10 transition-opacity">
+                            <span class="material-symbols-outlined text-[80px]">error</span>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </main>
+</div>
+
+<script>
+    const statusColors = {
+        'working': { color: 'text-primary-fixed', bg: 'glow-active' },
+        'complete': { color: 'text-secondary', bg: '' },
+        'blocked': { color: 'text-error', bg: '' },
+        'waiting': { color: 'text-outline-variant', bg: '' }
+    };
+
+    const allAgents = {
+        'Planning': ['product-manager', 'business-analyst', 'software-architect', 'security-architect'],
+        'Design': ['ux-researcher', 'ui-ux-designer', 'accessibility-engineer'],
+        'Development': ['frontend-engineer', 'backend-engineer', 'database-engineer', 'mobile-developer', 'fullstack-engineer'],
+        'Testing & Security': ['qa-manual-tester', 'automation-qa-engineer', 'appsec-engineer', 'penetration-tester'],
+        'Deployment': ['devops-engineer', 'cloud-engineer', 'sre-engineer'],
+        'Operations': ['secops-analyst', 'data-engineer', 'engineering-manager', 'tech-lead', 'release-manager', 'performance-engineer', 'technical-writer']
+    };
+
+    let currentRunId = null;
+    let agentsCache = {};
+    let displayedIdleAgents = [];
+
+    // Button event handlers
+    document.getElementById('export-csv-btn').addEventListener('click', () => {
+        console.log('Export CSV clicked');
+        exportToCSV();
+    });
+
+    document.getElementById('pause-all-btn').addEventListener('click', () => {
+        console.log('Pause All clicked');
+        pauseAllAgents();
+    });
+
+    // Populate idle agents with all available agents
+    function populateIdleAgents() {
+        const idleTbody = document.getElementById('idle-agents-table');
+        idleTbody.innerHTML = '';
+        displayedIdleAgents = [];
+
+        Object.entries(allAgents).forEach(([phase, agents]) => {
+            agents.forEach(agentName => {
+                displayedIdleAgents.push({ name: agentName, phase: phase });
+
+                const row = document.createElement('tr');
+                row.className = 'group hover:bg-surface-variant/30 transition-colors';
+                row.setAttribute('data-phase', phase);
+                row.setAttribute('data-agent', agentName);
+
+                const agent = agentsCache[agentName];
+                const status = agent?.status || 'available';
+                const statusDisplay = status === 'available' ? 'AVAILABLE' : status.toUpperCase();
+                const duration = agent?.duration_ms ? `${(agent.duration_ms / 1000).toFixed(0)}s` : '00:00:00';
+                const startTime = agent?.started_at ? new Date(agent.started_at).toLocaleString() : '--:--:--';
+                const statusColor = statusColors[status]?.color || 'text-outline-variant';
+                const dotColor = status === 'working' ? 'bg-primary-fixed pulse-active' : 'bg-outline';
+
+                row.innerHTML = `
+                    <td class="px-6 py-5 font-bold text-on-surface">#${agentName.substring(0, 8).toUpperCase()}</td>
+                    <td class="px-6 py-5">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full ${dotColor}"></span>
+                            <span class="${statusColor}">${statusDisplay}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-5 text-on-surface-variant">${phase}</td>
+                    <td class="px-6 py-5 text-on-surface-variant">${startTime}</td>
+                    <td class="px-6 py-5 text-on-surface">${duration}</td>
+                    <td class="px-6 py-5">
+                        <div class="bg-surface px-3 py-2 border border-outline-variant text-[10px] text-on-surface-variant/80 font-mono truncate">
+                            [${statusDisplay}] ${agentName}
+                        </div>
+                    </td>
+                    <td class="px-6 py-5">
+                        <button class="log-btn material-symbols-outlined text-on-surface-variant hover:text-primary-fixed transition-all cursor-pointer" data-agent="${agentName}">terminal</button>
+                    </td>
+                `;
+
+                idleTbody.appendChild(row);
+                row.querySelector('.log-btn').addEventListener('click', () => showAgentLogs(agentName));
+            });
+        });
+
+        document.getElementById('idle-count').textContent = `(${displayedIdleAgents.length})`;
+    }
+
+    function exportToCSV() {
+        const runningRows = document.querySelectorAll('#running-agents-table tr');
+        const idleRows = document.querySelectorAll('#idle-agents-table tr');
+        const completedRows = document.querySelectorAll('#completed-agents-table tr');
+        let csv = 'AGENT ID,STATUS,PHASE,START TIME,DURATION,LATEST LOG\n';
+
+        runningRows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            if (cells.length > 0) {
+                const rowData = Array.from(cells).slice(0, 6).map(cell => {
+                    const text = cell.textContent.trim().replace(/"/g, '""');
+                    return `"${text}"`;
+                }).join(',');
+                csv += rowData + '\n';
+            }
+        });
+
+        idleRows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            if (cells.length > 0) {
+                const rowData = Array.from(cells).slice(0, 6).map(cell => {
+                    const text = cell.textContent.trim().replace(/"/g, '""');
+                    return `"${text}"`;
+                }).join(',');
+                csv += rowData + '\n';
+            }
+        });
+
+        completedRows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            if (cells.length > 0) {
+                const rowData = Array.from(cells).slice(0, 6).map(cell => {
+                    const text = cell.textContent.trim().replace(/"/g, '""');
+                    return `"${text}"`;
+                }).join(',');
+                csv += rowData + '\n';
+            }
+        });
+
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `agents-${new Date().getTime()}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+    }
+
+    function pauseAllAgents() {
+        const runningRows = document.querySelectorAll('#running-agents-table tr');
+        let pausedCount = 0;
+
+        runningRows.forEach(row => {
+            const statusCell = row.querySelector('td:nth-child(2)');
+            if (statusCell && statusCell.textContent.includes('WORKING')) {
+                pausedCount++;
+            }
+        });
+
+        if (pausedCount > 0) {
+            console.log(`Paused ${pausedCount} agents`);
+            alert(`Paused ${pausedCount} running agents`);
+        } else {
+            alert('No agents currently running');
+        }
+    }
+
+    function showAgentLogs(agentName) {
+        const modal = document.createElement('div');
+        modal.className = 'fixed inset-0 bg-black/50 flex items-center justify-center z-50';
+        modal.id = 'log-modal';
+
+        const agent = agentsCache[agentName] || {};
+        const logs = agent.logs || `[${agent.status?.toUpperCase() || 'UNKNOWN'}] ${agentName}`;
+
+        modal.innerHTML = `
+            <div class="bg-surface-container-highest border border-outline-variant p-6 max-w-2xl w-full max-h-96 overflow-auto">
+                <div class="flex justify-between items-center mb-4">
+                    <h4 class="font-headline-md text-headline-md text-on-surface">Agent Logs: ${agentName}</h4>
+                    <button class="text-on-surface-variant hover:text-primary-fixed transition-colors cursor-pointer">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+                <pre class="font-code-sm text-code-sm text-on-surface-variant bg-surface-container p-4 border border-outline-variant overflow-x-auto">${logs}</pre>
+            </div>
+        `;
+
+        modal.querySelector('button').addEventListener('click', () => modal.remove());
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.remove();
+        });
+
+        document.body.appendChild(modal);
+    }
+
+    async function updateDashboard() {
+        try {
+            const runsRes = await fetch('/api/runs');
+            const runs = await runsRes.json();
+            if (runs.length === 0) return;
+
+            const runId = runs[0].id;
+            currentRunId = runId;
+            const runDataRes = await fetch(`/api/runs/${runId}`);
+            const runData = await runDataRes.json();
+
+            const agents = runData.log?.agents || {};
+            agentsCache = agents;
+
+            const runningTbody = document.getElementById('running-agents-table');
+            const completedTbody = document.getElementById('completed-agents-table');
+            runningTbody.innerHTML = '';
+            completedTbody.innerHTML = '';
+
+            let queued = 0, running = 0, complete = 0, failed = 0;
+            const totalAgents = Object.keys(agents).length;
+
+            Object.entries(agents).forEach(([name, agent]) => {
+                const status = agent.status || 'waiting';
+                const isGlow = status === 'working';
+
+                if (status === 'waiting') queued++;
+                if (status === 'working') running++;
+                if (status === 'complete') complete++;
+                if (status === 'blocked') failed++;
+
+                const row = document.createElement('tr');
+                row.className = `group hover:bg-surface-variant/30 transition-colors ${isGlow ? 'glow-active border-l-2 border-primary-fixed bg-surface-container-highest/50' : ''}`;
+
+                const duration = agent.duration_ms ? `${(agent.duration_ms / 1000).toFixed(0)}s` : '00:00:00';
+                const startTime = agent.started_at ? new Date(agent.started_at).toLocaleString() : '--:--:--';
+
+                row.innerHTML = `
+                    <td class="px-6 py-5 font-bold text-on-surface">#${name.substring(0, 8).toUpperCase()}</td>
+                    <td class="px-6 py-5">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full ${status === 'working' ? 'bg-primary-fixed pulse-active' : 'bg-outline'}"></span>
+                            <span class="${statusColors[status]?.color || 'text-on-surface-variant'}">${status.toUpperCase()}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-5 text-on-surface-variant">${name.split('-')[0].toUpperCase()}</td>
+                    <td class="px-6 py-5 text-on-surface-variant">${startTime}</td>
+                    <td class="px-6 py-5 text-on-surface">${duration}</td>
+                    <td class="px-6 py-5">
+                        <div class="bg-surface px-3 py-2 border border-outline-variant text-[10px] text-on-surface-variant/80 font-mono truncate">
+                            [${status.toUpperCase()}] ${name}
+                        </div>
+                    </td>
+                    <td class="px-6 py-5">
+                        <button class="log-btn material-symbols-outlined text-on-surface-variant hover:text-primary-fixed transition-all cursor-pointer" data-agent="${name}">terminal</button>
+                    </td>
+                `;
+
+                // Append to appropriate table
+                if (status === 'complete') {
+                    completedTbody.appendChild(row);
+                } else if (status === 'working') {
+                    runningTbody.appendChild(row);
+                }
+
+                row.querySelector('.log-btn').addEventListener('click', () => showAgentLogs(name));
+            });
+
+            // Sync Available Agents with current run status
+            populateIdleAgents();
+
+            // Update counts
+            document.getElementById('running-count').textContent = `(${running})`;
+            document.getElementById('completed-count').textContent = `(${complete})`;
+
+            document.getElementById('metric-queued').textContent = queued;
+            document.getElementById('metric-running').textContent = running;
+            document.getElementById('metric-complete').textContent = complete;
+            document.getElementById('metric-failed').textContent = failed;
+
+            const maxAgents = Math.max(totalAgents, 1);
+            document.getElementById('metric-queued-bar').style.width = `${(queued / maxAgents) * 100}%`;
+            document.getElementById('metric-running-bar').style.width = `${(running / maxAgents) * 100}%`;
+            document.getElementById('metric-complete-bar').style.width = `${(complete / maxAgents) * 100}%`;
+            document.getElementById('metric-failed-bar').style.width = `${(failed / maxAgents) * 100}%`;
+
+            document.getElementById('total-agents').textContent = `Total Agents: ${totalAgents}`;
+            document.getElementById('agent-count').textContent = `Monitoring ${totalAgents} active SDLC orchestration nodes`;
+        } catch (err) {
+            console.error('Error updating dashboard:', err);
+        }
+    }
+
+    // Initial load and poll every 2 seconds
+    populateIdleAgents();
+    updateDashboard();
+    setInterval(updateDashboard, 2000);
+
+    // WebSocket for real-time updates (graceful fallback if not available)
+    try {
+        const evtSource = new EventSource('/events');
+        evtSource.addEventListener('queue-updated', updateDashboard);
+        evtSource.addEventListener('agent-status-changed', updateDashboard);
+    } catch (e) {
+        console.warn('EventSource not available, using polling only');
+    }
+</script>
+</body>
+</html>

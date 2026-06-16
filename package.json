@@ -46,6 +46,9 @@
     "install-local": "node scripts/install-local.js",
     "uninstall": "node scripts/uninstall.js",
     "menu": "node scripts/sdlc-menu.js",
+    "ui": "node scripts/ui-server.js",
+    "orchestrator": "node scripts/orchestrator.js",
+    "report-agent": "node scripts/agent-reporter.js",
     "test": "echo 'Plugin tests would run here' && exit 0"
   },
   "bin": {
