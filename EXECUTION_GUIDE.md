@@ -36,31 +36,94 @@ Output:
 
 Open browser to **http://127.0.0.1:4242** to see the live dashboard.
 
-### 2. Run a Phase (in separate terminal)
+### 2. Run Phase 1 with Grill-Me Interview
 
+When you invoke `/sdlc-plan`, the workflow is:
+
+**Step A: Grill-Me Interview (Interactive)**
+```
+The system asks you 4 key questions about your project:
+
+Q1: What problem are you solving?
+    → Describe the user pain point
+
+Q2: Who are the users?
+    → Define 2-3 personas with pain points
+
+Q3: What constraints exist?
+    → Timeline, budget, tech debt, resources
+
+Q4: What are success criteria?
+    → Measurable outcomes (QUANTS framework)
+
+Once answered → grill-complete gate is set
+```
+
+**Step B: Agent Execution (Sequential)**
+```
+Once grill-complete:
+
+1. product-manager      → Synthesizes roadmap from grill session
+2. business-analyst     → Decomposes into INVEST user stories
+3. software-architect   → Selects tech stack, produces ADR
+4. security-architect   → STRIDE threat modeling
+```
+
+**Invoke it with:**
 ```bash
-# Phase 1: Planning
-node scripts/spawn-phase-agents.js plan <run-id>
+# Option 1: Provide feature description
+/sdlc-plan "add OAuth login to our SaaS product"
 
-# Phase 2: Design  
-node scripts/spawn-phase-agents.js design <run-id>
+# Option 2: Interactive (system asks "what are you planning?")
+/sdlc-plan
 
-# Phase 3: Development
-node scripts/spawn-phase-agents.js dev <run-id>
+# Option 3: From GitHub issue
+/sdlc-plan https://github.com/org/repo/issues/123
+```
 
-# Phase 4: Testing & Security
-node scripts/spawn-phase-agents.js test <run-id>
+**Example Flow:**
+```
+$ /sdlc-plan "add OAuth login"
 
-# Phase 5: Deployment
-node scripts/spawn-phase-agents.js deploy <run-id>
+🔥 GRILL-ME INTERVIEW STARTED
 
-# Phase 6: Operations
-node scripts/spawn-phase-agents.js ops <run-id>
+Q: What problem are you solving?
+My take: Users can't log in with social accounts. Is that it?
+> [You answer the question]
+
+Q: Who are the users?
+My take: SaaS customers, guest users? Specific roles?
+> [You answer]
+
+Q: What constraints exist?
+My take: Timeline (30 days)? Budget? Security requirements?
+> [You answer]
+
+Q: What are success criteria?
+My take: 80% login via OAuth in 60 days?
+> [You confirm]
+
+✅ Grill-complete. Proceeding to agents...
+
+▶️  Spawned: product-manager (roadmap)
+✅ Completed: product-manager
+
+▶️  Spawned: business-analyst (user stories)
+✅ Completed: business-analyst
+
+(continues with architect agents...)
+
+Phase 1 Complete! Review artifacts:
+- .sdlc/01-roadmap.md
+- .sdlc/01-requirements.md
+- .sdlc/01-architecture.md
+- .sdlc/01-threat-model.md
 ```
 
 ### 3. Monitor on Dashboard
 
 Dashboard shows in real-time:
+- ✓ Grill-me interview status
 - ✓ All agents in current phase
 - ✓ Status (waiting → working → complete)
 - ✓ Duration per agent
@@ -69,33 +132,69 @@ Dashboard shows in real-time:
 
 ---
 
-## Full Execution Flow
+## Full Execution Flow with Grill-Me
 
-### Phase 1: Planning
+### Phase 1: Planning (Interactive Interview + 4 Agents)
 
 ```bash
 # Terminal 1: Start orchestrator
 npm run orchestrator
 
-# Terminal 2: Run planning phase
-node scripts/spawn-phase-agents.js plan run-20260616T133615
+# Terminal 2: Invoke planning with grill-me interview
+/sdlc-plan "add OAuth login to SaaS"
 
-# Expected output:
-# ▶️  Spawned: product-manager
-# ✅ Completed: product-manager
-# ▶️  Spawned: business-analyst
-# ✅ Completed: business-analyst
-# ▶️  Spawned: software-architect
-# ✅ Completed: software-architect
-# ▶️  Spawned: security-architect
-# ✅ Completed: security-architect
+# === GRILL-ME INTERVIEW PHASE ===
+# (Interactive — you answer 4 questions)
+
+🔥 GRILL-ME INTERVIEW
+
+Q: What problem are you solving?
+My take: Current login is password-only. Want OAuth?
+> Our users demand single sign-on with Google/GitHub
+
+Q: Who are the users?
+My take: B2B SaaS customers? Engineers? Product teams?
+> Primarily developers and engineering managers
+
+Q: What constraints exist?
+My take: Timeline? Budget? Team size?
+> 4 weeks, 2 engineers, use existing auth service
+
+Q: What are success criteria?
+My take: QUANTS metrics? 70% adoption in 30 days?
+> Yes, 70% of new signups use OAuth within 30 days
+
+✅ Understanding confirmed. Marking grill-complete...
+
+# === AGENT EXECUTION PHASE ===
+
+▶️  Spawned: product-manager
+  ✓ Roadmap synthesized from interview
+✅ Completed: product-manager
+
+▶️  Spawned: business-analyst
+  ✓ User stories (INVEST) from personas
+✅ Completed: business-analyst
+
+▶️  Spawned: software-architect
+  ✓ ADR for OAuth2 + tech stack
+✅ Completed: software-architect
+
+▶️  Spawned: security-architect
+  ✓ STRIDE analysis, security controls
+✅ Completed: security-architect
+
+✅ Phase 1 Complete!
 
 # Artifacts generated:
+# .sdlc/run-20260616T133615/01-grill-summary.md (interview + confirmation)
 # .sdlc/run-20260616T133615/01-roadmap.md
 # .sdlc/run-20260616T133615/01-requirements.md
 # .sdlc/run-20260616T133615/01-architecture.md
 # .sdlc/run-20260616T133615/01-threat-model.md
 ```
+
+**Key: The grill-me interview informs all 4 agents' work.**
 
 ### Phase 2: Design
 
