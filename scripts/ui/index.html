@@ -135,7 +135,6 @@
                 <h2 class="font-headline-md text-headline-md font-bold tracking-tight text-on-surface">SYSTEM MONITOR</h2>
                 <div class="hidden lg:flex items-center gap-6 font-code-sm text-code-sm">
                     <span id="total-agents" class="text-primary-fixed font-bold">Total Agents: 0</span>
-                    <span id="uptime" class="text-on-surface-variant">Uptime: 99.9%</span>
                     <span id="errors" class="text-on-surface-variant">Recent Errors: 0</span>
                 </div>
             </div>
@@ -319,29 +318,6 @@
     document.getElementById('pause-all-btn').addEventListener('click', () => {
         console.log('Pause All clicked');
         pauseAllAgents();
-    });
-
-    // Search and filter functionality
-    document.getElementById('search-input').addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        const runningRows = document.querySelectorAll('#running-agents-table tr');
-        const idleRows = document.querySelectorAll('#idle-agents-table tr');
-        const completedRows = document.querySelectorAll('#completed-agents-table tr');
-
-        runningRows.forEach(row => {
-            const text = row.textContent.toLowerCase();
-            row.style.display = text.includes(query) ? '' : 'none';
-        });
-
-        idleRows.forEach(row => {
-            const text = row.textContent.toLowerCase();
-            row.style.display = text.includes(query) ? '' : 'none';
-        });
-
-        completedRows.forEach(row => {
-            const text = row.textContent.toLowerCase();
-            row.style.display = text.includes(query) ? '' : 'none';
-        });
     });
 
     function exportToCSV() {
