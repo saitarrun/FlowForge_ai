@@ -543,6 +543,29 @@ const server = http.createServer((req, res) => {
   res.end('Not found');
 });
 
+// Graceful shutdown handling (for process manager lifecycle)
+function gracefulShutdown(signal) {
+  if (process.env.SDLC_LIFECYCLE === 'managed') {
+    console.log(`\n[Orchestrator] Received ${signal}, shutting down gracefully...`);
+
+    // Close connections
+    server.close(() => {
+      console.log('[Orchestrator] Server closed');
+      process.exit(0);
+    });
+
+    // Force shutdown after 5 seconds
+    setTimeout(() => {
+      console.warn('[Orchestrator] Forcing shutdown...');
+      process.exit(1);
+    }, 5000);
+  }
+}
+
+// Signal handlers (only active when managed by process manager)
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+
 // Startup
 const runs = listRuns();
 if (!activeRunId && runs.length > 0) {
@@ -553,9 +576,24 @@ if (activeRunId) {
   initializeRun(activeRunId);
 }
 
+let serverStarted = false;
+
 server.listen(port, '127.0.0.1', () => {
+  serverStarted = true;
   console.log(`\n🎭 SDLC Orchestrator running at http://127.0.0.1:${port}`);
   console.log(`📁 Project: ${projectDir}`);
   console.log(`🏃 Active run: ${activeRunId || 'none'}`);
-  console.log('\nPress Ctrl+C to stop.\n');
+
+  if (process.env.SDLC_LIFECYCLE === 'managed') {
+    console.log('[Orchestrator] Managed by Process Manager');
+    console.log('[Orchestrator] Waiting for dashboard to connect...\n');
+  } else {
+    console.log('\nPress Ctrl+C to stop.\n');
+  }
+});
+
+// Handle startup errors
+server.on('error', (err) => {
+  console.error(`\n❌ Server error: ${err.message}`);
+  process.exit(1);
 });

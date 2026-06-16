@@ -252,9 +252,43 @@ const server = http.createServer((req, res) => {
   res.end('Not found');
 });
 
+// Graceful shutdown handling (for process manager lifecycle)
+function gracefulShutdown(signal) {
+  if (process.env.SDLC_LIFECYCLE === 'managed') {
+    console.log(`\n[Dashboard] Received ${signal}, shutting down gracefully...`);
+
+    // Close connections
+    server.close(() => {
+      console.log('[Dashboard] Server closed');
+      process.exit(0);
+    });
+
+    // Force shutdown after 5 seconds
+    setTimeout(() => {
+      console.warn('[Dashboard] Forcing shutdown...');
+      process.exit(1);
+    }, 5000);
+  }
+}
+
+// Signal handlers (only active when managed by process manager)
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+
 server.listen(port, '127.0.0.1', () => {
   const uiUrl = `http://127.0.0.1:${port}`;
   console.log(`\n📊 SDLC Dashboard running at ${uiUrl}`);
   console.log(`📁 Scanning: ${projectDir}`);
-  console.log(`\nPress Ctrl+C to stop.\n`);
+
+  if (process.env.SDLC_LIFECYCLE === 'managed') {
+    console.log('[Dashboard] Managed by Process Manager\n');
+  } else {
+    console.log(`\nPress Ctrl+C to stop.\n`);
+  }
+});
+
+// Handle startup errors
+server.on('error', (err) => {
+  console.error(`\n❌ Dashboard error: ${err.message}`);
+  process.exit(1);
 });
