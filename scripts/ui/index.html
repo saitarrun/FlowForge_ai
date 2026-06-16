@@ -127,19 +127,6 @@
 </head>
 <body class="bg-background text-on-surface font-body-lg selection:bg-primary-fixed selection:text-on-primary-fixed">
 <div class="flex min-h-screen">
-    <!-- SideNavBar -->
-    <aside class="w-[280px] h-screen sticky left-0 top-0 border-r border-outline-variant bg-surface flex flex-col py-margin-desktop px-4 z-50">
-        <div class="mb-10 px-4">
-            <h1 class="font-display text-headline-lg font-black tracking-tighter text-primary-fixed">ORCHESTRATOR</h1>
-            <p class="font-label-caps text-label-caps text-on-surface-variant opacity-60">v2.4.0-stable</p>
-        </div>
-        <div class="mt-auto px-4 pb-4">
-            <button id="new-run-btn" class="w-full py-4 bg-primary-fixed text-on-primary-fixed font-label-caps text-label-caps font-bold tracking-widest hover:brightness-110 active:scale-[0.98] transition-all cursor-pointer">
-                NEW RUN
-            </button>
-        </div>
-    </aside>
-
     <!-- Main Canvas -->
     <main class="flex-1 flex flex-col min-w-0">
         <!-- TopAppBar -->
@@ -281,11 +268,6 @@
     });
 
     // Button event handlers
-    document.getElementById('new-run-btn').addEventListener('click', () => {
-        console.log('New Run button clicked');
-        alert('New Run initiated - Feature coming soon');
-    });
-
     document.getElementById('export-csv-btn').addEventListener('click', () => {
         console.log('Export CSV clicked');
         exportToCSV();
