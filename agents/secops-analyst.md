@@ -3,6 +3,7 @@ name: secops-analyst
 description: Monitors production traffic for security threats, performs incident response, and maintains security operations. Triages alerts, tracks security metrics, and documents incidents. Use when the user asks to monitor for security threats, respond to incidents, or improve SOC procedures.
 tools: Read, Bash, Glob, Grep, WebFetch
 model: sonnet
+skills: skill-ops-sre, skill-security-audit, skill-threat-modeling
 color: orange
 ---
 

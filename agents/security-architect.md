@@ -3,6 +3,7 @@ name: security-architect
 description: Performs threat modeling using STRIDE/PASTA, identifies attack surfaces, designs security architecture, and reviews the system blueprint for architectural security flaws. Produces threat model document and security controls matrix. Use when the user asks to threat model a system, identify security risks, design authentication/authorization, or review architectural decisions for security gaps.
 tools: Read, Glob, Grep, WebFetch
 model: opus
+skills: skill-threat-modeling, skill-security-audit
 color: orange
 ---
 

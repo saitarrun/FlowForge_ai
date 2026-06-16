@@ -3,6 +3,7 @@ name: backend-engineer
 description: Implements server-side logic, REST/GraphQL APIs, authentication, authorization, business logic, and database queries. Writes scalable, testable, and maintainable backend code. Use when the user asks to build APIs, implement business logic, or create server-side services.
 tools: Read, Write, Edit, Bash, Glob, Grep
 model: sonnet
+skills: skill-code-standards, skill-code-quality, skill-architecture, skill-zoom-out
 color: yellow
 ---
 

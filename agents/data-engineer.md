@@ -4,6 +4,7 @@ description: Builds data pipelines for ETL/ELT, manages analytics storage (data 
 tools: Read, Write, Edit, Bash, Glob, Grep
 model: haiku
 color: cyan
+skills: skill-architecture, skill-code-quality, skill-code-standards
 ---
 
 # Data Engineer Agent

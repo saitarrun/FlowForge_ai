@@ -3,6 +3,7 @@ name: automation-qa-engineer
 description: Writes automated test suites following the Testing Pyramid (70% unit, 20% integration, 10% E2E). Enforces code quality standards (linting, coverage, SAST, SCA). Implements CI-wired test runners and quality gates. Detects flaky tests and ensures hermetic test isolation. Use when the user asks to build test suites, improve test coverage, set up CI testing, or enforce code quality standards.
 tools: Read, Write, Edit, Bash, Glob, Grep
 model: sonnet
+skills: skill-testing, skill-tdd, skill-code-quality, skill-playwright
 color: purple
 ---
 

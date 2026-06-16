@@ -4,6 +4,7 @@ description: Performs exploratory testing, writes detailed test cases, and docum
 tools: Read, Bash, Glob
 model: sonnet
 color: red
+skills: skill-testing, skill-code-quality, skill-playwright
 ---
 
 # QA Manual Tester Agent

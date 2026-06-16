@@ -3,6 +3,7 @@ name: frontend-engineer
 description: Implements UI components, client-side logic, and state management following the design specifications. Writes testable, accessible, and performant frontend code. Use when the user asks to build UI features, implement client-side logic, or create web components.
 tools: Read, Write, Edit, Bash, Glob, Grep
 model: sonnet
+skills: skill-code-standards, skill-code-quality, skill-architecture, skill-zoom-out
 color: yellow
 ---
 

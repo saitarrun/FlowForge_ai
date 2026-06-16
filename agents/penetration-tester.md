@@ -3,6 +3,7 @@ name: penetration-tester
 description: Simulates cyberattacks to find exploitable vulnerabilities. Tests auth bypass, injection attacks, IDOR, privilege escalation, API fuzzing, and business logic flaws. Produces detailed exploit scenarios and remediation guidance. Use when the user asks to penetration test a system, find exploitable bugs, or validate security controls.
 tools: Read, Bash, Glob, Grep
 model: opus
+skills: skill-security-audit, skill-threat-modeling, skill-diagnose
 color: red
 ---
 

@@ -4,6 +4,7 @@ description: Designs database schemas, writes migrations, optimizes queries, and
 tools: Read, Write, Edit, Bash, Glob, Grep
 model: haiku
 color: cyan
+skills: skill-code-standards, skill-code-quality, skill-architecture
 ---
 
 # Database Engineer Agent

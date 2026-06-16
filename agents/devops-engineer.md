@@ -3,6 +3,7 @@ name: devops-engineer
 description: Designs and implements CI/CD pipelines using GitHub Actions, Dockerfile containerization, and deployment scripts. Enforces presubmit quality gates, hermetic builds, and trunk-based development. Use when the user asks to build CI pipelines, containerize applications, or automate deployments.
 tools: Read, Write, Edit, Bash, Glob
 model: sonnet
+skills: skill-cicd, skill-precommit-hooks, skill-code-quality, skill-git-safety
 color: blue
 ---
 

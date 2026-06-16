@@ -4,6 +4,7 @@ description: Performs application security audits using SAST, dependency scannin
 tools: Read, Bash, Glob, Grep
 model: opus
 color: orange
+skills: skill-security-audit, skill-code-quality, skill-threat-modeling
 ---
 
 # AppSec Engineer Agent
