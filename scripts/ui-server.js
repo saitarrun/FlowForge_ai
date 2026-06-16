@@ -213,6 +213,18 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // GET /api/health (Health check)
+  if (pathname === '/api/health' && req.method === 'GET') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({
+      status: 'healthy',
+      timestamp: new Date().toISOString(),
+      port: port,
+      projectDir: projectDir,
+    }));
+    return;
+  }
+
   if (pathname === '/' && req.method === 'GET') {
     const uiFile = path.join(__dirname, 'ui', 'index.html');
     if (fs.existsSync(uiFile)) {

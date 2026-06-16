@@ -222,6 +222,7 @@ const broadcaster = new SseBroadcaster();
 let coordinator = null;
 let scheduler = null;
 let queueMgr = null;
+let stateSyncInterval = null; // Continuous state sync to dashboard
 
 // Initialize run directory and coordinator
 function initializeRun(runId) {
@@ -242,7 +243,47 @@ function initializeRun(runId) {
   scheduler = new AgentScheduler(runDir, depGraph, queueMgr, broadcaster, coordinator);
   activeRunId = runId;
 
+  // Start continuous state sync to dashboard
+  startStateSyncBroadcast(runDir);
+
   return runDir;
+}
+
+// Broadcast agent state continuously to dashboard clients
+function startStateSyncBroadcast(runDir) {
+  // Clear any existing interval
+  if (stateSyncInterval) {
+    clearInterval(stateSyncInterval);
+  }
+
+  // Broadcast full state every 1 second (dashboard polls every 2 seconds)
+  stateSyncInterval = setInterval(() => {
+    if (!coordinator) return;
+
+    try {
+      const log = coordinator.collaborationLog.read();
+      const context = coordinator.sharedContext.read();
+
+      // Broadcast comprehensive state update
+      broadcaster.send('state-sync', {
+        runId: activeRunId,
+        timestamp: new Date().toISOString(),
+        agents: log.agents || {},
+        messages: (log.messages || []).slice(-10), // Last 10 messages
+        context: context,
+      });
+    } catch (err) {
+      // Silently ignore read errors during concurrent access
+    }
+  }, 1000);
+}
+
+// Stop broadcasting when run ends
+function stopStateSyncBroadcast() {
+  if (stateSyncInterval) {
+    clearInterval(stateSyncInterval);
+    stateSyncInterval = null;
+  }
 }
 
 // List available runs
@@ -423,13 +464,33 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // GET /events (SSE)
+  // GET /api/health (Health check)
+  if (pathname === '/api/health' && req.method === 'GET') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({
+      status: 'healthy',
+      timestamp: new Date().toISOString(),
+      activeRun: activeRunId,
+      port: port,
+    }));
+    return;
+  }
+
+  // GET /events (SSE - Real-time agent updates)
   if (pathname === '/events' && req.method === 'GET') {
     res.writeHead(200, {
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-cache',
       'Connection': 'keep-alive',
     });
+
+    // Send initial state to newly connected client
+    if (activeRunId && coordinator) {
+      const log = coordinator.collaborationLog.read();
+      res.write(`event: agent-state-sync\n`);
+      res.write(`data: ${JSON.stringify(log, null, 2)}\n\n`);
+    }
+
     broadcaster.addClient(res);
     req.on('close', () => broadcaster.removeClient(res));
     return;
@@ -489,10 +550,24 @@ const server = http.createServer((req, res) => {
     const agent = spawnMatch[1];
     if (coordinator) {
       coordinator.markWorking(agent);
-      broadcaster.send('agent-status-changed', { runId: activeRunId, agentName: agent, status: 'working' });
+      // Immediately broadcast to dashboard
+      broadcaster.send('agent-status-changed', {
+        runId: activeRunId,
+        agentName: agent,
+        status: 'working',
+        timestamp: new Date().toISOString()
+      });
+      // Also send full state sync for immediate consistency
+      const log = coordinator.collaborationLog.read();
+      broadcaster.send('state-sync', {
+        runId: activeRunId,
+        timestamp: new Date().toISOString(),
+        agents: log.agents || {},
+        context: coordinator.sharedContext.read(),
+      });
     }
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ ok: true, agent }));
+    res.end(JSON.stringify({ ok: true, agent, status: 'working' }));
     return;
   }
 
@@ -502,11 +577,25 @@ const server = http.createServer((req, res) => {
     const agent = completeMatch[1];
     if (coordinator) {
       coordinator.markComplete(agent, []);
-      broadcaster.send('agent-status-changed', { runId: activeRunId, agentName: agent, status: 'complete' });
+      // Immediately broadcast to dashboard
+      broadcaster.send('agent-status-changed', {
+        runId: activeRunId,
+        agentName: agent,
+        status: 'complete',
+        timestamp: new Date().toISOString()
+      });
       scheduler.updateQueue();
+      // Send full state sync for immediate consistency
+      const log = coordinator.collaborationLog.read();
+      broadcaster.send('state-sync', {
+        runId: activeRunId,
+        timestamp: new Date().toISOString(),
+        agents: log.agents || {},
+        context: coordinator.sharedContext.read(),
+      });
     }
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ ok: true, agent }));
+    res.end(JSON.stringify({ ok: true, agent, status: 'complete' }));
     return;
   }
 
@@ -521,7 +610,20 @@ const server = http.createServer((req, res) => {
         log.agents[agent].blocked_at = new Date().toISOString();
         coordinator.collaborationLog.write(log);
       }
-      broadcaster.send('agent-status-changed', { runId: activeRunId, agentName: agent, status: 'blocked' });
+      // Immediately broadcast to dashboard
+      broadcaster.send('agent-status-changed', {
+        runId: activeRunId,
+        agentName: agent,
+        status: 'blocked',
+        timestamp: new Date().toISOString()
+      });
+      // Send full state sync
+      broadcaster.send('state-sync', {
+        runId: activeRunId,
+        timestamp: new Date().toISOString(),
+        agents: log.agents || {},
+        context: coordinator.sharedContext.read(),
+      });
     }
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ ok: true, agent }));
