@@ -36,9 +36,9 @@
     "scripts/",
     ".claude-plugin/",
     "integrations/",
+    "docs/",
     "README.md",
     "CLAUDE.md",
-    "INTEGRATIONS.md",
     "QUICK_REFERENCE.md"
   ],
   "scripts": {

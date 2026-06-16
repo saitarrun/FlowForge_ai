@@ -163,7 +163,6 @@ npm run install-local
 /plugin install github:saitarrun/sdlc-workflow
 ```
 
-See [INSTALLATION.md](./INSTALLATION.md) for detailed setup instructions.
 
 ## Usage
 
@@ -425,6 +424,20 @@ Test the plugin with sample features:
 ## License
 
 MIT (or as specified by the user)
+
+## Core Files (Essentials Only)
+
+- **README.md** ← Features, installation, usage
+- **CLAUDE.md** ← Agent/skill conventions, how to extend
+- **QUICK_REFERENCE.md** ← Commands, copy-paste examples
+
+## Extended Documentation
+
+Reference docs archived in `docs/`:
+- `docs/INTEGRATION.md` — code-review-graph integration
+- `docs/AGENT_DEVELOPMENT_GUIDE.md` — Agent anatomy
+- `docs/AGENT_COLLABORATION.md` — Parallel execution details
+- `docs/AGENT_SKILLS_MANIFEST.md` — Skill mapping reference
 
 ## Contributing
 
