@@ -111,8 +111,4 @@ Read only when relevant:
 - `AGENT_DEVELOPMENT_GUIDE.md` — Anatomy, extending, testing
 - `AGENT_COLLABORATION.md` — Parallel execution, shared context
 - `INSTALLATION.md` — Setup and distribution
-
 ---
-
-**Maintained By**: saitarrun  
-**Last Updated**: 2026-06-16
