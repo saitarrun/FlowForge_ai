@@ -23,7 +23,7 @@ const PHASES = [
 
 const DEPENDENCIES = {
   'product-manager': [],
-  'business-analyst': ['product-manager'],
+  'business-analyst': ['product-manager', 'product-manager:grill-complete'],
   'software-architect': ['business-analyst'],
   'security-architect': ['software-architect'],
   'ux-researcher': ['business-analyst'],
@@ -69,14 +69,21 @@ const sdlcDir = path.join(projectDir, '.sdlc');
 
 // DependencyGraph: manages agent readiness
 class DependencyGraph {
-  isReady(agentName, completedAgents) {
+  isReady(agentName, completedAgents, gateStatus = {}) {
     const deps = DEPENDENCIES[agentName] || [];
-    return deps.every((dep) => completedAgents.includes(dep));
+    return deps.every((dep) => {
+      // Handle special gate dependencies (e.g., 'product-manager:grill-complete')
+      if (dep.includes(':')) {
+        const [depAgent, depGate] = dep.split(':');
+        return gateStatus[depAgent] && gateStatus[depAgent].includes(depGate);
+      }
+      return completedAgents.includes(dep);
+    });
   }
 
-  getReadyAgents(completedAgents) {
+  getReadyAgents(completedAgents, gateStatus = {}) {
     const allAgents = Object.keys(DEPENDENCIES);
-    return allAgents.filter((agent) => this.isReady(agent, completedAgents) && !completedAgents.includes(agent));
+    return allAgents.filter((agent) => this.isReady(agent, completedAgents, gateStatus) && !completedAgents.includes(agent));
   }
 
   getDependencies(agentName) {
@@ -185,14 +192,23 @@ class AgentScheduler {
         .filter(([_, agent]) => agent.status === 'complete')
         .map(([name, _]) => name);
 
-      // Unblock ready agents
-      const ready = this.depGraph.getReadyAgents(completed);
+      // Extract gate status (e.g., product-manager:grill-complete)
+      const gateStatus = {};
+      Object.entries(agents).forEach(([name, agent]) => {
+        if (agent.gates && Array.isArray(agent.gates)) {
+          gateStatus[name] = agent.gates;
+        }
+      });
+
+      // Unblock ready agents (considering both completed AND gate dependencies)
+      const ready = this.depGraph.getReadyAgents(completed, gateStatus);
       this.queueMgr.setReady(ready);
 
       // Broadcast queue update
       this.broadcaster.send('queue-updated', {
         runId: activeRunId,
         readyAgents: ready,
+        gateStatus: gateStatus,
       });
     } catch {
       // Ignore read errors during concurrent file access
