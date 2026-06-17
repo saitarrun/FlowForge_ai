@@ -56,16 +56,16 @@
     "node": ">=18.0.0"
   },
   "files": [
+    "README.md",
+    "CLAUDE.md",
+    "QUICK_REFERENCE.md",
     "agents/",
     "skills/",
     "commands/",
     "scripts/",
     ".claude-plugin/",
     "integrations/",
-    "docs/",
-    "README.md",
-    "CLAUDE.md",
-    "QUICK_REFERENCE.md"
+    "docs/"
   ],
   "scripts": {
     "validate": "node scripts/validate-plugin.js",
