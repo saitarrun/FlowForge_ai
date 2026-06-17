@@ -76,22 +76,111 @@ Use **skill-grill-me** to relentlessly interview the customer. This is not a cas
 
 **CRITICAL: Marking Grill-Me as Complete**
 When you have fully completed the grill-me phase:
-1. Save a summary file: `.sdlc/01-grill-summary.md` with all 4 phases documented
-2. Document: Problem statement, User personas, Constraints, Success criteria
-3. Mark gate as complete by updating collaboration-log.json:
+
+1. **Save comprehensive grill-summary file**: `.sdlc/01-grill-summary.md` with all 4 phases documented in detail. This is the SINGLE SOURCE OF TRUTH for all downstream agents.
+
+   ```markdown
+   # Grill-Me Summary
+
+   ## Problem Statement
+   [Direct quote from customer about what problem they're solving]
+   - Why this matters NOW: [Customer's urgency/business reason]
+   - What they've tried before: [Previous attempts and failures]
+   - Underlying assumption: [What they THINK is true]
+   - Your challenge to that assumption: [What you questioned]
+   - Customer's final answer: [Resolved understanding]
+
+   ## User Personas
+   [For each persona mentioned by customer]
+   
+   ### Persona 1: [Name/Role]
+   - Who they are: [Description]
+   - Current pain point: [Specific, measurable problem they face]
+   - How they currently solve it: [Status quo]
+   - Why they'd use our solution: [Competitive advantage]
+   - Success metric: [How they'd measure if we solved their problem]
+
+   ## Constraints & Trade-offs
+   
+   ### Timeline
+   - Target ship date: [Specific date, not "ASAP"]
+   - Why that date: [Business reason - conference, competitor, funding]
+   - Realistic? [Your assessment - did you push on this?]
+   
+   ### Budget
+   - Engineering capacity: [Team size, hours available]
+   - Estimated effort: [Your sizing based on conversation]
+   - Trade-off if over budget: [What gets cut if timeline is fixed]
+   
+   ### Technical Constraints
+   - Must integrate with: [Systems customer owns]
+   - Cannot use: [Tech customer won't accept]
+   - Preferred stack: [Customer's preference if stated]
+   
+   ### Organizational/Compliance
+   - Stakeholders who must approve: [Who has veto power]
+   - Regulatory requirements: [GDPR, HIPAA, PCI-DSS, SOC2, etc.]
+   - Security concerns: [What keeps customer up at night]
+
+   ## Success Criteria (QUANTS-Aligned)
+   
+   ### Quality
+   - Uptime/reliability target: [e.g., 99.9%]
+   - Performance target: [e.g., <100ms p95 latency]
+   - Bug tolerance: [e.g., zero critical in production]
+   
+   ### Attention
+   - Engineering time allocation: [% on feature vs maintenance]
+   - Team capacity available: [How much can this team commit?]
+   
+   ### Toil
+   - Manual work to eliminate: [What's broken today]
+   - Operational overhead: [On-call burden, support tickets]
+   
+   ### Time
+   - Deployment frequency: [How often should we release?]
+   - Lead time to production: [From commit to customer]
+   - Time to first value: [When customer sees results]
+   
+   ### Satisfaction
+   - Customer NPS/CSAT target: [Specific number]
+   - User adoption target: [% of audience, timeline]
+   - Developer satisfaction: [Onboarding time, tooling friction]
+
+   ## Decisions Made During Grill-Me
+   - [Decision 1]: [What we resolved]
+   - [Decision 2]: [What customer confirmed]
+   - [Assumption validated]: [What we tested and customer agreed with]
+
+   ## Unresolved Questions (If Any)
+   - [Question 1]: [Still open? Why? Who decides?]
+   - [Decision needed by]: [When must this be resolved?]
+
+   ## Final Confirmation
+   - [ ] Customer confirmed all 4 phases
+   - [ ] Problem statement is clear and agreed
+   - [ ] Personas and pain points are documented
+   - [ ] Constraints are explicit and realistic
+   - [ ] Success criteria are measurable and aligned
+   ```
+
+2. Mark gate as complete by updating collaboration-log.json:
    ```json
    {
      "agents": {
        "product-manager": {
          "status": "working",
          "gates": ["grill-complete"],
-         "grill_timestamp": "2026-06-16T14:30:00Z"
+         "grill_timestamp": "2026-06-16T14:30:00Z",
+         "grill_summary_path": ".sdlc/01-grill-summary.md"
        }
      }
    }
    ```
-4. Business Analyst will automatically unlock and begin Phase 2
-5. Output: `.sdlc/01-grill-summary.md` must be present before unlocking downstream agents
+
+3. Downstream agents (business-analyst, software-architect, security-architect) will automatically unlock and read `.sdlc/01-grill-summary.md` as their PRIMARY source of truth
+   
+4. **CRITICAL**: `.sdlc/01-grill-summary.md` MUST be comprehensive and detailed. Every agent depends on it. If it's vague or incomplete, all downstream work will be misaligned with customer needs.
 
 ### 2. ONLY AFTER GRILL-ME COMPLETE: Parse Feature Request
 After ALL FOUR GRILL PHASES are fully resolved, read the user's feature description or GitHub issue. Extract (now informed by grill session):

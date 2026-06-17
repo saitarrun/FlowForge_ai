@@ -117,11 +117,29 @@ Output: 01-threat-model.md (STRIDE analysis, security controls)
 Show:
 - ✅ Phase 1 Complete
 - Run ID and artifact location
-- Dashboard URL: http://127.0.0.1:4242
 - Summary of generated files
 
 ---
 
+## Critical Data Flow
+
+```
+User Input (Grill-Me)
+    ↓
+.sdlc/01-grill-summary.md (Source of Truth)
+    ↓
+    ├─→ product-manager → 01-roadmap.md (references grill-summary)
+    ├─→ business-analyst → 01-requirements.md (grounded in grill-summary + roadmap)
+    ├─→ software-architect → 01-architecture.md (constrained by grill-summary + requirements)
+    └─→ security-architect → 01-threat-model.md (scoped by grill-summary + architecture)
+```
+
+**CRITICAL**: Every artifact downstream depends on grill-summary. User input is the first priority.
+
+---
+
 **Mandatory**: All 32 grill-me questions must be asked. Follow the sections strictly.  
+**Mandatory**: Grill summary MUST be saved before agents start.  
+**Mandatory**: Each agent MUST read grill-summary as their first step.  
 **Mandatory**: Each agent must complete before the next spawns.  
 **Mandatory**: All artifacts must be generated and saved.

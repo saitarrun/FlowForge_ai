@@ -1,6 +1,6 @@
 {
   "name": "sdlc-ai-workflow",
-  "version": "1.2.3",
+  "version": "1.3.0",
   "description": "Complete SDLC Workflow Plugin for Claude Code: 26 agents, 43 skills, 14 commands, 6 phases. Covers planning → design → development → testing → deployment → operations, with industry-standard SDLC best practices embedded in every agent.",
   "keywords": [
     "claude-code",
@@ -72,9 +72,7 @@
     "install-local": "node scripts/install-local.js",
     "uninstall": "node scripts/uninstall.js",
     "menu": "node scripts/sdlc-menu.js",
-    "ui": "node scripts/ui-server.js",
     "orchestrator": "node scripts/orchestrator.js",
-    "init-dashboard": "node scripts/init-dashboard.js",
     "agent-init": "node scripts/agent-init-hook.js",
     "report-agent": "node scripts/agent-reporter.js",
     "test": "echo 'Plugin tests would run here' && exit 0"

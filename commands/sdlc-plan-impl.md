@@ -38,9 +38,6 @@ fi
 
 # Run the orchestrator with grill-me
 node scripts/sdlc-orchestrator.js "$1"
-
-# Show dashboard
-echo "📊 Dashboard: http://127.0.0.1:4242"
 ```
 
 ## Grill-Me Interview Questions
@@ -102,16 +99,6 @@ After completion:
 ├── 01-architecture.md          (tech stack, ADR)
 └── 01-threat-model.md          (STRIDE, controls)
 ```
-
-## Real-Time Monitoring
-
-Dashboard shows:
-- ✓ Grill interview progress
-- ✓ Agent status (waiting → working → complete)
-- ✓ Dependency resolution
-- ✓ Artifact generation
-
-Visit: **http://127.0.0.1:4242**
 
 ---
 

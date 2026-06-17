@@ -16,8 +16,6 @@ Agent Spawner (invokes agents as they become ready)
 Agents (execute in sequence, respecting dependencies)
     ↓
 Collaboration Log (shared state, status updates)
-    ↓
-Dashboard (real-time monitoring)
 ```
 
 ## Quick Start
@@ -27,14 +25,6 @@ Dashboard (real-time monitoring)
 ```bash
 npm run orchestrator
 ```
-
-Output:
-```
-✓ Orchestrator ready at http://127.0.0.1:4242
-✓ Dashboard available at http://127.0.0.1:4242
-```
-
-Open browser to **http://127.0.0.1:4242** to see the live dashboard.
 
 ### 2. Run Phase 1 with Grill-Me Interview
 
@@ -119,16 +109,6 @@ Phase 1 Complete! Review artifacts:
 - .sdlc/01-architecture.md
 - .sdlc/01-threat-model.md
 ```
-
-### 3. Monitor on Dashboard
-
-Dashboard shows in real-time:
-- ✓ Grill-me interview status
-- ✓ All agents in current phase
-- ✓ Status (waiting → working → complete)
-- ✓ Duration per agent
-- ✓ Live metrics
-- ✓ Artifact generation progress
 
 ---
 
@@ -239,35 +219,6 @@ node scripts/spawn-phase-agents.js test <run-id>
 node scripts/spawn-phase-agents.js deploy <run-id>
 node scripts/spawn-phase-agents.js ops <run-id>
 ```
-
----
-
-## Real-Time Monitoring
-
-### Dashboard Features
-
-**http://127.0.0.1:4242** shows:
-
-1. **Agent Status Table**
-   - Running Agents: Shows working agents with duration
-   - Available Agents: Shows waiting agents
-   - Completed Agents: Shows finished agents with total time
-
-2. **Metrics Dashboard**
-   - Queued: Agents waiting for dependencies
-   - Running: Agents currently executing
-   - Completed: Agents finished
-   - Failed: Agents with errors
-
-3. **Real-Time Updates**
-   - SSE push updates every 1 second
-   - Polling fallback every 2 seconds
-   - Live metrics refresh
-
-4. **Artifact Browser**
-   - View generated artifacts
-   - Download files
-   - Export data
 
 ---
 
@@ -441,5 +392,4 @@ See `CLAUDE.md` and `README.md` for integration details.
 ---
 
 **Status**: System ready for orchestrated execution  
-**Latest Commit**: Check git log  
-**Dashboard**: http://127.0.0.1:4242
+**Latest Commit**: Check git log
