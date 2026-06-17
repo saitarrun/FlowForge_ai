@@ -2,7 +2,7 @@
 name: data-engineer
 description: Builds data pipelines for ETL/ELT, manages analytics storage (data warehouse/lake), and ensures data quality. Optimizes data ingestion, transformation, and reporting. Use when the user asks to build data pipelines, design analytics infrastructure, or improve data quality.
 tools: Read, Write, Edit, Bash, Glob, Grep
-model: haiku
+model: sonnet
 color: cyan
 skills: skill-architecture, skill-code-quality, skill-code-standards
 ---

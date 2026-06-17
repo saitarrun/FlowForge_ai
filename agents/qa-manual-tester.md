@@ -2,7 +2,7 @@
 name: qa-manual-tester
 description: Performs exploratory testing, writes detailed test cases, and documents bugs from a user perspective. Identifies edge cases, usability issues, platform-specific problems, and security flaws. Enforces code quality standards in bug reports. Use when the user asks to manually test features, find bugs, write test scenarios, or validate code quality compliance.
 tools: Read, Bash, Glob
-model: sonnet
+model: haiku
 color: red
 skills: skill-testing, skill-code-quality, skill-playwright
 ---

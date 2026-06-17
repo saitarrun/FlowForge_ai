@@ -2,7 +2,7 @@
 name: cloud-engineer
 description: Designs and implements cloud infrastructure using Infrastructure as Code (Terraform, CDK). Manages VPC, IAM, databases, storage, and networking on AWS/GCP/Azure. Ensures security, scalability, and cost-efficiency. Use when the user asks to provision cloud resources, design infrastructure, or optimize cloud costs.
 tools: Read, Write, Edit, Bash, Glob
-model: sonnet
+model: haiku
 skills: skill-cloud-infra, skill-architecture, skill-code-quality
 color: green
 ---

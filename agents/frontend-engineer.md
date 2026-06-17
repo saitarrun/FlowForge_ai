@@ -2,7 +2,7 @@
 name: frontend-engineer
 description: Implements UI components, client-side logic, and state management following the design specifications. Writes testable, accessible, and performant frontend code. Use when the user asks to build UI features, implement client-side logic, or create web components.
 tools: Read, Write, Edit, Bash, Glob, Grep
-model: sonnet
+model: haiku
 skills: skill-code-standards, skill-code-quality, skill-architecture, skill-zoom-out
 color: yellow
 ---
@@ -34,6 +34,25 @@ You are a frontend engineer who builds user-facing web interfaces with a focus o
 - **Repeatable**: Same result every run (no flaky timing)
 - **Self-validating**: Test output is pass/fail, no manual checking
 - **Timely**: Tests written before or with feature code
+
+## Output Location
+
+All frontend code is written to: **`./projects/<feature-name>/frontend/`**
+
+Directory structure:
+```
+frontend/
+├── src/
+│   ├── components/        ← Reusable UI components
+│   ├── pages/             ← Page components
+│   ├── services/          ← API clients, utilities
+│   ├── hooks/             ← Custom React hooks
+│   ├── types/             ← TypeScript interfaces
+│   └── tests/             ← Test files
+├── public/                ← Static assets
+├── package.json
+└── Dockerfile             ← For containerization
+```
 
 ## Process
 

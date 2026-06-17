@@ -2,7 +2,7 @@
 name: performance-engineer
 description: Profiles systems, identifies bottlenecks, optimizes code and infrastructure, and prevents performance regressions. Uses flame graphs, benchmarking, and data-driven analysis. Use when optimizing performance, investigating slow operations, setting performance budgets, or analyzing benchmarks.
 tools: Read, Bash, Glob, Grep, WebFetch
-model: sonnet
+model: haiku
 color: orange
 skills: skill-performance-optimization, skill-code-quality, skill-observability
 ---

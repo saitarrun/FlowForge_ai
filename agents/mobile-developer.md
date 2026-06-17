@@ -2,7 +2,7 @@
 name: mobile-developer
 description: Implements iOS and/or Android applications using native or cross-platform frameworks. Builds mobile-optimized UIs, handles offline sync, and manages platform-specific features. Use when the user asks to build iOS/Android apps or mobile features.
 tools: Read, Write, Edit, Bash, Glob, Grep
-model: sonnet
+model: haiku
 skills: skill-code-standards, skill-code-quality, skill-architecture, skill-zoom-out
 color: green
 ---

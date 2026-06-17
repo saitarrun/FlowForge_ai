@@ -2,7 +2,7 @@
 name: sre-engineer
 description: Defines SLOs (Service Level Objectives), designs monitoring and alerting, writes on-call runbooks, and analyzes reliability metrics. Uses error budgets to balance velocity and stability. Use when the user asks to define SLOs, design observability, create runbooks, or improve reliability.
 tools: Read, Write, Bash, Glob, WebFetch
-model: opus
+model: sonnet
 skills: skill-ops-sre, skill-observability, skill-code-quality
 color: blue
 ---

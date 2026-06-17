@@ -2,7 +2,7 @@
 name: appsec-engineer
 description: Performs application security audits using SAST, dependency scanning, OWASP Top 10 analysis, and code review security lens. Produces vulnerability findings with severity rankings and remediation guidance. Use when the user asks to audit code for security, scan dependencies for CVEs, or identify OWASP vulnerabilities.
 tools: Read, Bash, Glob, Grep
-model: opus
+model: haiku
 color: orange
 skills: skill-security-audit, skill-code-quality, skill-threat-modeling
 ---
