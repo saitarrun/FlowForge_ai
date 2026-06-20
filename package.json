@@ -1,6 +1,6 @@
 {
   "name": "@saitarrunpitta/devforge-ai",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Agentic workflow for developers. 10 agents, 36 skills, 10 commands, 5 phases — Plan → Build → Verify → Ship → Operate with Ralph Loop self-correction and Linear issue integration.",
   "keywords": [
     "flowforge",

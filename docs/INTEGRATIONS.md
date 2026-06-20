@@ -125,7 +125,7 @@ No additional installation required. When you install `devforge-ai`, code-review
 ```bash
 # One-step install includes both
 npm install -g devforge-ai
-# ✓ SDLC Agent Kit plugin installed
+# ✓ DevForge AI plugin installed
 # ✓ code-review-graph integration enabled
 ```
 

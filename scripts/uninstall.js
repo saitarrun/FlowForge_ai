@@ -12,7 +12,7 @@ const path = require('path');
 const PLUGIN_DIR = path.join(__dirname, '..');
 const CLAUDE_HOME = path.join(process.env.HOME || process.env.USERPROFILE, '.claude');
 
-console.log('🧹 Uninstalling SDLC Agent Kit Plugin...\n');
+console.log('🧹 Uninstalling DevForge AI Plugin...\n');
 
 function removePath(target, label) {
   if (fs.existsSync(target)) {
@@ -37,5 +37,5 @@ if (fs.existsSync(skillsSrc)) {
     });
 }
 
-console.log('\n✅ SDLC Agent Kit plugin uninstalled.');
+console.log('\n✅ DevForge AI plugin uninstalled.');
 console.log('Restart Claude Code to deactivate the plugin.');

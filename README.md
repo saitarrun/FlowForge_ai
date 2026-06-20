@@ -1,19 +1,19 @@
 <p>
   <a href="https://github.com/saitarrun/devforge-ai">
-    <img alt="SDLC Agent Kit" src="https://img.shields.io/badge/FlowForge__AI-Agentic%20SDLC%20Workflow-111827?style=for-the-badge&logo=github&logoColor=white" width="369">
+    <img alt="DevForge AI" src="https://img.shields.io/badge/DevForge__AI-Agentic%20Workflow%20for%20Developers-111827?style=for-the-badge&logo=github&logoColor=white" width="369">
   </a>
 </p>
 
-# SDLC Agent Kit
+# DevForge AI
 
-[![npm version](https://img.shields.io/npm/v/%40saitarrunpitta%2Fdevforge-ai?style=flat-square&color=blue)](https://www.npmjs.com/package/devforge-ai)
+[![npm version](https://img.shields.io/npm/v/%40saitarrunpitta%2Fdevforge-ai?style=flat-square&color=blue)](https://www.npmjs.com/package/@saitarrunpitta/devforge-ai)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js->=18.0.0-green?style=flat-square&logo=node.js)](https://nodejs.org/)
 [![SDLC Automation](https://img.shields.io/badge/SDLC-Automation-green?style=flat-square)](https://github.com/saitarrun/devforge-ai)
 
-Agentic SDLC orchestration for Claude Code. SDLC Agent Kit turns an idea into a planned, built, verified, shipped, and operated feature using role-specific agents, tracer bullet slices, quality gates, and handoff documents.
+Agentic SDLC orchestration for Claude Code. DevForge AI turns an idea into a planned, built, verified, shipped, and operated feature using role-specific agents, tracer bullet slices, quality gates, and handoff documents.
 
-This is not a one-shot code generator. SDLC Agent Kit is a delivery workflow: product thinking first, thin vertical slices, feedback loops, security and performance checks, deployment assets, and operational follow-through.
+This is not a one-shot code generator. DevForge AI is a delivery workflow: product thinking first, thin vertical slices, feedback loops, security and performance checks, deployment assets, and operational follow-through.
 
 ## Quickstart
 
@@ -23,7 +23,7 @@ This is not a one-shot code generator. SDLC Agent Kit is a delivery workflow: pr
 sudo npm install -g devforge-ai
 ```
 
-2. Install the SDLC Agent Kit agents, skills, commands, and integrations into Claude Code:
+2. Install the DevForge AI agents, skills, commands, and integrations into Claude Code:
 
 ```bash
 devforge-ai install
@@ -56,15 +56,15 @@ npm run install-local
 
 Restart Claude Code after installing. See [INSTALLATION.md](INSTALLATION.md) for update, symlink, and uninstall instructions.
 
-## Why SDLC Agent Kit Exists
+## Why DevForge AI Exists
 
-SDLC Agent Kit is built around the common places AI-assisted engineering breaks down.
+DevForge AI is built around the common places AI-assisted engineering breaks down.
 
 ### 1. The Agent Builds The Wrong Thing
 
 The first failure mode is misalignment. A feature request sounds obvious until the agent fills in the wrong blanks.
 
-SDLC Agent Kit starts with `/sdlc-plan`, where the `product-manager` agent runs a structured interview, writes `grill-summary.md`, produces `scope.json`, synthesizes a PRD, and creates implementation issues. The result is a concrete build plan before any code is written.
+DevForge AI starts with `/sdlc-plan`, where the `product-manager` agent runs a structured interview, writes `grill-summary.md`, produces `scope.json`, synthesizes a PRD, and creates implementation issues. The result is a concrete build plan before any code is written.
 
 Use this when:
 
@@ -75,7 +75,7 @@ Use this when:
 
 ### 2. The Work Is Too Big To Trust
 
-Large agent tasks fail because the feedback loop is too slow. SDLC Agent Kit breaks features into tracer bullet slices: thin increments that cut through schema, API, UI, and tests where needed.
+Large agent tasks fail because the feedback loop is too slow. DevForge AI breaks features into tracer bullet slices: thin increments that cut through schema, API, UI, and tests where needed.
 
 Each slice is tracked in `scope.json`:
 
@@ -106,7 +106,7 @@ The first slice establishes the foundation. Every later slice delivers one user-
 
 ### 3. The Code Does Not Work
 
-SDLC Agent Kit uses the Ralph Loop during build work:
+DevForge AI uses the Ralph Loop during build work:
 
 - Implement one slice
 - Run the relevant type checks and tests
@@ -118,7 +118,7 @@ This gives the agent a disciplined feedback loop instead of relying on confidenc
 
 ### 4. The Process Loses Context
 
-Long SDLC sessions can drown the model in stale conversation history. SDLC Agent Kit uses handoff documents at phase gates:
+Long SDLC sessions can drown the model in stale conversation history. DevForge AI uses handoff documents at phase gates:
 
 ```text
 plan-handoff.md   -> /sdlc-build
@@ -131,7 +131,7 @@ Each phase reads the handoff first, then starts with bounded context. Decisions 
 
 ### 5. Shipping Is Not The End
 
-SDLC Agent Kit includes verification, deployment, and operations phases. The workflow does not stop when code compiles.
+DevForge AI includes verification, deployment, and operations phases. The workflow does not stop when code compiles.
 
 The later phases cover:
 
@@ -183,7 +183,7 @@ Every SDLC run writes into a project folder:
 
 ## Reference
 
-SDLC Agent Kit is split into commands, agents, and skills.
+DevForge AI is split into commands, agents, and skills.
 
 Commands are what you type. Agents are the role-specific workers. Skills are methodology documents that agents load when their task needs that discipline.
 
@@ -215,7 +215,7 @@ Commands are what you type. Agents are the role-specific workers. Skills are met
 
 ### Core Skills
 
-These are the skills most central to the SDLC Agent Kit pipeline:
+These are the skills most central to the DevForge AI pipeline:
 
 - **[`grill-me`](./skills/grill-me/SKILL.md)** - Structured interrogation before planning.
 - **[`requirements`](./skills/requirements/SKILL.md)** - User stories, acceptance criteria, ambiguity checks, and INVEST-style decomposition.

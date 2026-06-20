@@ -13,7 +13,7 @@ const path = require('path');
 const PLUGIN_DIR = path.join(__dirname, '..');
 const CLAUDE_HOME = path.join(process.env.HOME || process.env.USERPROFILE, '.claude');
 
-console.log('📦 Installing SDLC Agent Kit Plugin...\n');
+console.log('📦 Installing DevForge AI Plugin...\n');
 
 if (!fs.existsSync(CLAUDE_HOME)) {
   fs.mkdirSync(CLAUDE_HOME, { recursive: true });
@@ -75,7 +75,7 @@ if (fs.existsSync(integrationsSrc)) {
   );
 }
 
-console.log('\n✅ SDLC Agent Kit plugin installed successfully!\n');
+console.log('\n✅ DevForge AI plugin installed successfully!\n');
 console.log('Available commands:');
 console.log('  /sdlc                    Master orchestrator (all 6 phases)');
 console.log('  /sdlc-plan               Phase 1: Planning & requirements');
