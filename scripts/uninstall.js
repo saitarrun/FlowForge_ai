@@ -12,7 +12,7 @@ const path = require('path');
 const PLUGIN_DIR = path.join(__dirname, '..');
 const CLAUDE_HOME = path.join(process.env.HOME || process.env.USERPROFILE, '.claude');
 
-console.log('🧹 Uninstalling SDLC Workflow Plugin...\n');
+console.log('🧹 Uninstalling FlowForge_AI Plugin...\n');
 
 function removePath(target, label) {
   if (fs.existsSync(target)) {
@@ -24,8 +24,8 @@ function removePath(target, label) {
 }
 
 // Agents and commands live in their own plugin subdirectory.
-removePath(path.join(CLAUDE_HOME, 'agents', 'sdlc-workflow'), 'agents/sdlc-workflow');
-removePath(path.join(CLAUDE_HOME, 'commands', 'sdlc-workflow'), 'commands/sdlc-workflow');
+removePath(path.join(CLAUDE_HOME, 'agents', 'flowforge_ai'), 'agents/flowforge_ai');
+removePath(path.join(CLAUDE_HOME, 'commands', 'flowforge_ai'), 'commands/flowforge_ai');
 
 // Skills are copied individually into ~/.claude/skills; remove only ours.
 const skillsSrc = path.join(PLUGIN_DIR, 'skills');
@@ -37,5 +37,5 @@ if (fs.existsSync(skillsSrc)) {
     });
 }
 
-console.log('\n✅ SDLC Workflow plugin uninstalled.');
+console.log('\n✅ FlowForge_AI plugin uninstalled.');
 console.log('Restart Claude Code to deactivate the plugin.');

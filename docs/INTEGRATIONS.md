@@ -21,7 +21,7 @@ A specialized code review analysis tool that provides:
 The code-review-graph is automatically included. Access it via:
 
 ```bash
-# From the sdlc-workflow directory
+# From the FlowForge directory
 cd integrations/code-review-graph
 
 # Or directly reference from plugin
@@ -120,12 +120,12 @@ ELSE:
 
 ### For Plugin Users
 
-No additional installation required. When you install `sdlc-ai-workflow`, code-review-graph comes pre-integrated:
+No additional installation required. When you install `@saitarrunpitta/flowforge_ai`, code-review-graph comes pre-integrated:
 
 ```bash
 # One-step install includes both
-npm install -g sdlc-ai-workflow
-# ✓ SDLC Workflow plugin installed
+npm install -g @saitarrunpitta/flowforge_ai
+# ✓ FlowForge_AI plugin installed
 # ✓ code-review-graph integration enabled
 ```
 
@@ -138,8 +138,8 @@ To update the submodule:
 git submodule update --remote
 
 # Or clone with submodules
-git clone https://github.com/saitarrun/sdlc-ai-workflow.git
-cd sdlc-workflow
+git clone https://github.com/saitarrun/FlowForge_ai.git
+cd FlowForge_ai
 git submodule update --init --recursive
 ```
 
