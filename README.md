@@ -9,7 +9,7 @@
 > **Optimised SDLC AI workflow** — 10 role-specific agents × 5 phases with tracer bullet delivery and self-correction loops
 
 [![npm version](https://img.shields.io/npm/v/%40saitarrunpitta%2Fdevforge-ai?style=flat-square&color=blue)](https://www.npmjs.com/package/@saitarrunpitta/devforge-ai)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue?style=flat-square)](LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js->=18.0.0-green?style=flat-square&logo=node.js)](https://nodejs.org/)
 [![SDLC Automation](https://img.shields.io/badge/SDLC-Automation-green?style=flat-square)](https://github.com/saitarrun/devforge-ai)
 
@@ -299,4 +299,4 @@ npm pack --dry-run
 
 ## License
 
-MIT
+Apache 2.0
